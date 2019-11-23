@@ -1,0 +1,16 @@
+language: python
+# which travis file code will it read
+python:
+  - "3.6"
+
+services:
+  - docker
+# we will only be using travis for docker
+
+before_script: pip install docker-compose
+# before running travis, we need to install docker compose
+
+script:
+  - docker-compose run app sh -c "python manage.py test && flake8"
+# every time we push to git hub it will run the above code to check the test files. If it fails the build it will send us a notification via email.
+# flake8 is a linting tool
