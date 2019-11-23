@@ -1,0 +1,19 @@
+version: "3"
+# version of docker compose
+
+services:
+  app:
+    build:
+      context: .
+    ports:
+      - "8000:8000"
+      # port 8000 on local to 8000 on docker
+    volumes:
+      - ./app:/app
+      # maps app directory to the app directory in docker image
+    command: >
+      sh -c "python manage.py runserver 0.0.0.0:8000"
+      # run command using shell to run the django server on port 8000 on local machine
+
+# to run the above, you use $ docker-compose build
+# to create a django project you can use this code $ docker-compose run app sh -c "django-admin.py startproject app ."
